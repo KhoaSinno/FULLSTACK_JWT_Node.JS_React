@@ -3,8 +3,8 @@ import configViewEngine from "./config/viewEngine";
 import initWebRoutes from "./routes/web";
 require('dotenv').config()
 
-const app = express() // create server
 const PORT = process.env.PORT || 8082
+const app = express() // create server
 
 configViewEngine(app)
 initWebRoutes(app)
