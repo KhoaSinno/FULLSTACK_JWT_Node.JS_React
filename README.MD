@@ -13,3 +13,8 @@
 - public: contain html css js ....
 - views: display data with user
 - routes: route pages
+
+## Questions
+
+### #3 mvc
+- 
