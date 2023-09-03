@@ -9,6 +9,11 @@
 - npm i --save-exact @babel/core@7.15.4 @babel/node@7.15.4 @babel/preset-env@7.15.4 nodemon@2.0.15
 - ... clone file ***package.json*** to easy install
 
+## Document
+
+- SEQUELIZE (V4): <https://sequelize.org/v4/manual/tutorial/migrations>
+- Node, Postgres, and Sequelize: <https://mherman.org/blog/node-postgres-sequelize/>
+
 ## Structure element
 
 - file: ***server.js*** - run web server
