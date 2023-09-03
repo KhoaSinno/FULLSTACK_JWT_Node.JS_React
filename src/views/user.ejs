@@ -9,7 +9,6 @@
 </head>
 
 <body>
-
     <div class="container">
         <div class="row">
             <div class="userInfo_container">
@@ -28,7 +27,7 @@
                     </div>
                     <div class="col-12"></div>
                     <div class="mb-3 col-6">
-                        <label for="userName" class="form-label">Text</label>
+                        <label for="userName" class="form-label">Username</label>
                         <input type="text" class="form-control" id="userName" name="username" required>
                     </div>
                     <div class="col-12">
@@ -37,7 +36,6 @@
 
                 </form>
             </div>
-
             <div class="table-user mt-3">
                 <h2>Table user: </h2>
                 <table class="table table-bordered table-hover table-striped">
@@ -62,7 +60,7 @@
                                     <%= user.username %>
                                 </td>
                                 <td>
-                                    <button class="btn btn-warning">Edit</button>
+                                    <a class="btn btn-warning" href="/user-update/<%= user.id %>">Edit</a>
                                     <form class="d-inline" action="/user-delete/<%= user.id %>" method="POST">
                                         <button class="btn btn-danger" type="submit">Delete</button>
                                     </form>
