@@ -28,6 +28,8 @@
 - views: display data with user in what way display data with view engine's nodejs
 - public: contain html css js ....
 - routes: route pages
+- models: determine structure like database but its command line interface
+- migrations: 'ánh xạ' from models to determine more detail structure
 
 ## Questions
 
@@ -35,6 +37,12 @@
 
 - model - view - controller
 
+- ORM
+
 ## Learn more
 
 - async await
+
+## Knowledge
+
+-
