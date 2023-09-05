@@ -11,7 +11,7 @@ module.exports = {
      *   isBetaMember: false
      * }], {});
     */
-    await queryInterface.bulkInsert('Users', [
+    await queryInterface.bulkInsert('User', [
       {
         email: 'Sinoo1',
         password: '123',
