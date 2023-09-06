@@ -28,9 +28,9 @@ const handleUpdateUser = async (req, res) => {
 }
 
 const getUserUpdate = async (req, res) => {
-    const userList = await userService.getUserById(req.params.id)
-    let user = {}
-    if (userList && userList.length > 0) user = userList[0]
+    const userGet = await userService.getUserById(req.params.id)
+    let user = userGet.get({ plain: true })
+    // if (userList && userList.length > 0) user = userList[0]
     return res.render("user-update.ejs", { user })
 }
 
