@@ -75,6 +75,28 @@ const getUserList = async () => {
     //     console.log(`CHeck error: `, error)
     // }
 
+
+    let newUser = await db.User.findAll({
+        where: { id: 1 },
+        raw: true,
+        attributes: ["id", "username", "email"],
+        include: { model: db.Group, attributes: ["name", "description"] },
+        nest: true
+    })
+
+    let roles = await db.Role.findAll({
+        raw: true,
+        attributes: ['url', 'description'],
+        include: { model: db.Group, where: { id: 1 }, attributes: ['id', 'name', 'description'], },
+        nest: true
+    })
+
+
+    console.log('<<<< CHeck new User: ', newUser)
+    console.log('<<<< CHeck new roles: ', roles)
+
+
+
     let userList = []
     userList = await db.User.findAll()
     return userList
