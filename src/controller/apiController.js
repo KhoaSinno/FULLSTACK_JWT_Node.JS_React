@@ -21,7 +21,7 @@ const handleRegister = async (req, res) => {
                 EC: '-1', // Error code
                 DT: '' // data
             })
-        
+
         // Service: Create new user
         let data = await loginRegisterService.registerNewUser(req.body) //req.body a object full in4
 
@@ -39,8 +39,15 @@ const handleRegister = async (req, res) => {
         })
     }
 }
-
+const handleLogin = async (req, res) => {
+    console.log('>>>>check log req: ', req.body)
+    return res.status(200).json({
+        message: 'ok',
+        data: 'test api login'
+    })
+}
 module.exports = {
     testApi,
-    handleRegister
+    handleRegister,
+    handleLogin
 }
