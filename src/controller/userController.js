@@ -53,7 +53,12 @@ const updateFunc = async (req, res) => {
 }
 const deleteFunc = async (req, res) => {
     try {
-
+        let data = await userApiServices.deleteUser(req.body.id)
+        return res.status(200).json({
+            EM: data.EM, // Error message
+            EC: data.EC, // Error code
+            DT: data.DT // data
+        })
     } catch (e) {
         console.log(e)
         return res.status(500).json({
