@@ -1,4 +1,32 @@
 const db = require("../models")
+const getUserWithPagination = async (page, limit) => {
+    try {
+        //offset: the number of records that need to be skipped
+        let offset = (page - 1) * limit
+        const { count, rows } = await db.User.findAndCountAll({
+            offset: offset,
+            limit: limit
+        })
+        let totalPerPages = Math.ceil(count / limit)
+
+        let data = {
+            totalRow: count, totalPerPages, users: rows
+        }
+
+        return {
+            EM: 'fetch ok',
+            EC: 0,
+            DT: data
+        }
+    } catch (e) {
+        console.log(e)
+        return {
+            EM: 'Some thing wrong with service',
+            EC: 1,
+            DT: []
+        }
+    }
+}
 
 const getAllUser = async () => {
 
@@ -61,5 +89,5 @@ const deleteUser = async (id) => {
 }
 
 module.exports = {
-    getAllUser, createUser, updateUser, deleteUser
+    getAllUser, createUser, updateUser, deleteUser, getUserWithPagination
 }

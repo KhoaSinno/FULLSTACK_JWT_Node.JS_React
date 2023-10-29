@@ -85,8 +85,8 @@ const handleLogin = async (rawData) => {
             }
         })
         if (user) {
-            console.log('>>>>>>Check ', user.get({ plain: true }))
-            console.log('>>>>Found user')
+            //console.log('>>>>>>Check ', user.get({ plain: true }))
+            //console.log('>>>>Found user')
             let isCorrectPass = checkPassword(rawData.password, user.password)
             if (isCorrectPass) return {
                 EM: 'Ok',
@@ -94,12 +94,12 @@ const handleLogin = async (rawData) => {
                 DT: '',
             }
         }
-            console.log('>>>>Not found user match email/phone: ', rawData.valueLogin, '>>>Pass: ', rawData.password)
-            return {
-                EM: 'Input email/phone or password is incorrect',
-                EC: '1',
-                DT: '',
-            }
+        console.log('>>>>Not found user match email/phone: ', rawData.valueLogin, '>>>Pass: ', rawData.password)
+        return {
+            EM: 'Input email/phone or password is incorrect',
+            EC: '1',
+            DT: '',
+        }
     } catch (e) {
         console.log('>>>>', e)
         return {

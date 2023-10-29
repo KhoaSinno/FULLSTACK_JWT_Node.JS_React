@@ -7,7 +7,6 @@ const testApi = (req, res) => {
     })
 }
 const handleRegister = async (req, res) => {
-    console.log('call me', req.body)
     try {
         if (!req.body.email || !req.body.phone || !req.body.password)
             return res.status(200).json({
@@ -42,7 +41,7 @@ const handleRegister = async (req, res) => {
 const handleLogin = async (req, res) => {
 
     try {
-       let data = await loginRegisterService.handleLogin(req.body)
+        let data = await loginRegisterService.handleLogin(req.body)
         return res.status(200).json({
             EM: data.EM, // Error message
             EC: data.EC, // Error code
