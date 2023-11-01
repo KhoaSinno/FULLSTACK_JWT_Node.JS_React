@@ -57,11 +57,21 @@ const getAllUser = async () => {
         }
     }
 }
-const createUser = async () => {
+const createUser = async (data) => {
     try {
-        await db.User.createUser()
+        await db.User.create(data)
+        return {
+            EM: 'Create success user',
+            EC: 0,
+            DT: []
+        }
     } catch (e) {
         console.log(e)
+        return {
+            EM: 'Some thing wrong with service',
+            EC: 1,
+            DT: []
+        }
     }
 }
 const updateUser = async (data) => {
