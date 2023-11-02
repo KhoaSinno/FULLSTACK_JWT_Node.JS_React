@@ -1,4 +1,8 @@
+import { checkEmailExist, checkPhoneExist, hashPassword } from './loginRegisterService'
 const db = require("../models")
+import emailvalidator from 'email-validator'
+
+
 const getUserWithPagination = async (page, limit) => {
     try {
         //offset: the number of records that need to be skipped
@@ -6,8 +10,10 @@ const getUserWithPagination = async (page, limit) => {
         const { count, rows } = await db.User.findAndCountAll({
             offset: offset,
             limit: limit,
-            attributes: ["id", "username", "email", "phone", "sex"],
-            include: { model: db.Group, attributes: ["name", "description"] },
+            attributes: ["id", "username", "email", "phone", "sex", 'address'],
+            include: { model: db.Group, attributes: ["name", "description", 'id'] },
+            order: [['id', 'DESC']]
+
         })
         let totalPerPages = Math.ceil(count / limit)
 
@@ -35,7 +41,7 @@ const getAllUser = async () => {
     try {
         let users = await db.User.findAll({
             attributes: ["id", "username", "email", "phone", "sex"],
-            include: { model: db.Group, attributes: ["name", "description"] },
+            include: { model: db.Group, attributes: ["name", "description"] }
         })
 
         return users ? {
@@ -59,7 +65,49 @@ const getAllUser = async () => {
 }
 const createUser = async (data) => {
     try {
-        await db.User.create(data)
+        //CHECK VALIDATE
+        if (!data.email || !data.phone || !data.password)
+            return {
+                EM: 'Missing required parameter',
+                EC: 1,
+                DT: ''
+            }
+        if (!emailvalidator.validate(data.email)) {
+            return {
+                EM: 'Email invalid',
+                EC: 1,
+                DT: 'email'
+            }
+        }
+
+        if (data.password && data.password.length < 4)
+            return {
+                EM: 'Your password have to over 3 letters',
+                EC: -1,
+                DT: 'password'
+            }
+        // b1: check email/phone are existed
+        let isEmailExist = await checkEmailExist(data.email)
+        if (isEmailExist) {
+            return {
+                EM: 'The email is already exist',
+                EC: '1',
+                DT: 'email'
+            }
+        }
+        let isPhoneExist = await checkPhoneExist(data.phone)
+        if (isPhoneExist) {
+            return {
+                EM: 'The phone is already exist',
+                EC: '1',
+                DT: 'phone'
+            }
+        }
+        // b2: hash password
+        let hashPasswordUser = hashPassword(data.password)
+
+        // CREATE
+        await db.User.create({ ...data, password: hashPasswordUser })
         return {
             EM: 'Create success user',
             EC: 0,
