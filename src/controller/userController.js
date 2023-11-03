@@ -48,7 +48,7 @@ const createFunc = async (req, res) => {
 const updateFunc = async (req, res) => {
     try {
         //create user
-        let data = await userApiServices.updateFunc(req.body)
+        let data = await userApiServices.updateUser(req.body)
         return res.status(200).json({
             EM: data.EM,
             EC: data.EC,
