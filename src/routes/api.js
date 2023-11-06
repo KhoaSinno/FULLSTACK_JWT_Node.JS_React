@@ -7,10 +7,13 @@ const router = express.Router()
 
 const initApiRoutes = (app) => {
 
+    // All router and method have to pass this this middleware
+    router.all('*', checkUserJWT, checkUserPermission)
+
     router.post('/register', apiController.handleRegister)
     router.post('/login', apiController.handleLogin)
 
-    router.get('/user/read', checkUserJWT, checkUserPermission, userController.readFunc)
+    router.get('/user/read', userController.readFunc)
     router.post('/user/create', userController.createFunc)
     router.put('/user/update', userController.updateFunc)
     router.delete('/user/delete', userController.deleteFunc)
