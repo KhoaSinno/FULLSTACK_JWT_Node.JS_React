@@ -5,6 +5,7 @@ import initApiRoutes from "./routes/api";
 import configCors from "./config/cors"
 require('dotenv').config()
 import bodyParser from "body-parser";
+import cookieParser from "cookie-parser";
 // import connection from "./config/connectDB";
 const PORT = process.env.PORT || 8082
 const app = express() // create server
@@ -14,6 +15,10 @@ configCors(app)
 //config body-parser to get data from client site (form frontend)
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+
+//config cookie-parser
+app.use(cookieParser())
+
 
 // check connect db
 // connection()

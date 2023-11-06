@@ -6,7 +6,7 @@ const router = express.Router()
 
 const testMiddleware = (req, res, next) => {
     console.log('calling middleware')
-    if (true) {
+    if (false) {
         return res.send('reject middleware')
     }
     next()
