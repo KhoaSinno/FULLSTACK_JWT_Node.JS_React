@@ -24,6 +24,12 @@ configViewEngine(app)
 // route
 initWebRoutes(app)
 initApiRoutes(app)
+
+
+app.use((req, res) => {
+    return res.send('404 Not found')
+})
+
 app.listen(PORT, () => {
     console.log(`<<< Run web server ${PORT}`)
 })
