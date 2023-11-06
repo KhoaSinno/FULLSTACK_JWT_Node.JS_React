@@ -102,7 +102,7 @@ const handleLogin = async (rawData) => {
             let token = createJWT(payload)
 
             if (isCorrectPass) return {
-                EM: 'Ok',
+                EM: 'Success login',
                 EC: '0',
                 DT: {
                     access_token: token,
