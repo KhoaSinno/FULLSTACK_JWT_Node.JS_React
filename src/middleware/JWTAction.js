@@ -31,11 +31,12 @@ const checkUserJWT = (req, res, next) => {
     if (nonSecurePaths.includes(req.path)) return next()
 
     let cookies = req.cookies
-    if (cookies?.jwt) {
+    if (cookies && cookies.jwt) {
         let token = cookies.jwt
         let decoded = verifyJWT(token)
         if (decoded) {
             req.user = decoded // info user (email, group, roles....)
+            req.token = token
             next()
         } else {
             return res.status(401).json({
@@ -57,8 +58,7 @@ const checkUserJWT = (req, res, next) => {
 
 // middleware check permission
 const checkUserPermission = (req, res, next) => {
-    if (nonSecurePaths.includes(req.path)) return next()
-
+    if (nonSecurePaths.includes(req.path) || req.path === '/account') return next()
     if (req.user) {
         let email = req.user.email // more and more be carefully
         let roles = req.user.getGroupWithRole.Roles

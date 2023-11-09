@@ -90,38 +90,45 @@ const handleLogin = async (rawData) => {
         })
         if (user) {
             let isCorrectPass = checkPassword(rawData.password, user.password)
+            if (isCorrectPass) {
+                let getGroupWithRole = await getGroupWithRoles(user)
 
-            //test roles
-            let getGroupWithRole = await getGroupWithRoles(user)
-
-            let payload = {
-                email: user.email,
-                getGroupWithRole,
-                expiresIn: process.env.JWT_EXPIRES_IN
-            }
-            let token = createJWT(payload)
-
-            if (isCorrectPass) return {
-                EM: 'Success login',
-                EC: '0',
-                DT: {
-                    access_token: token,
-                    getGroupWithRole,
+                let payload = {
                     email: user.email,
                     username: user.username,
+                    getGroupWithRole,
+                    expiresIn: process.env.JWT_EXPIRES_IN
+                }
+                let token = createJWT(payload)
+                return {
+                    EM: 'Success login',
+                    EC: 0,
+                    DT: {
+                        access_token: token,
+                        getGroupWithRole,
+                        email: user.email,
+                        username: user.username,
+                    }
+                }
+            } else {
+                return {
+                    EM: 'Input email/phone or password is incorrect',
+                    EC: 1,
+                    DT: '',
                 }
             }
         }
         return {
-            EM: 'Input email/phone or password is incorrect',
-            EC: '1',
+            EM: 'Incorrect info or not found user...',
+            EC: 2,
             DT: '',
         }
     } catch (e) {
         console.log('>>>>', e)
         return {
             EM: 'Something wrongs in service Login',
-            EC: '-1'
+            EC: -1,
+            DT: '',
         }
     }
 }
