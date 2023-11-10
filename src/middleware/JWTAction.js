@@ -25,14 +25,21 @@ const verifyJWT = (token) => {
     }
     return decoded
 }
-
+const extractToken = (req) => {
+    if (req.headers.authorization && req.headers.authorization.split(' ')[0] === 'Bearer') {
+        return req.headers.authorization.split(' ')[1];
+    }
+    return null;
+}
 // middleware check login user
 const checkUserJWT = (req, res, next) => {
     if (nonSecurePaths.includes(req.path)) return next()
 
+    let tokenFromHeader = extractToken(req)
     let cookies = req.cookies
-    if (cookies && cookies.jwt) {
-        let token = cookies.jwt
+
+    if ((cookies && cookies.jwt) || tokenFromHeader) {
+        let token = cookies && cookies.jwt ? cookies.jwt : tokenFromHeader
         let decoded = verifyJWT(token)
         if (decoded) {
             req.user = decoded // info user (email, group, roles....)
