@@ -8,7 +8,7 @@ const createJWT = (payload) => {
     let key = process.env.JWT_SECRET
     let token = null
     try {
-        token = jwt.sign(payload, key);
+        token = jwt.sign(payload, key, { expiresIn: process.env.JWT_EXPIRES_IN });
     } catch (error) {
         console.log(error)
     }
