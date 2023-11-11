@@ -39,7 +39,6 @@ const handleRegister = async (req, res) => {
     }
 }
 const handleLogin = async (req, res) => {
-
     try {
         let data = await loginRegisterService.handleLogin(req.body)
 
@@ -60,11 +59,29 @@ const handleLogin = async (req, res) => {
             DT: ''
         })
     }
+}
+const handleLogout = async (req, res) => {
+
+    try {
+        res.clearCookie("jwt");
+        return res.status(200).json({
+            EM: 'Clear cookie success...',
+            EC: 0,
+            DT: ''
+        })
+    } catch (e) {
+        console.log('>>>>>', e)
+        return res.status(500).json({
+            EM: 'error form server',
+            EC: -1,
+            DT: ''
+        })
+    }
 
 
 }
 module.exports = {
     testApi,
     handleRegister,
-    handleLogin
+    handleLogin, handleLogout
 }
