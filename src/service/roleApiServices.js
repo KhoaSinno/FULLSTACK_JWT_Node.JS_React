@@ -68,6 +68,39 @@ const deleteRole = async (id) => {
                 DT: []
             }
         }
+    } catch (e) {
+        console.log(e)
+        return {
+            EM: 'Some thing wrong with service',
+            EC: 1,
+            DT: []
+        }
+    }
+}
+const updateRole = async (data) => {
+    try {
+        let role = await db.Role.findOne({
+            where: { id: data.id }
+        })
+        if (role) {
+            // update
+            await role.update({
+                url: data.url,
+                description: data.description,
+            })
+            return {
+                EM: 'Update role success',
+                EC: 0,
+                DT: ''
+            }
+        } else {
+            // not found role
+            return {
+                EM: 'Role not found',
+                EC: 2,
+                DT: ''
+            }
+        }
 
     } catch (e) {
         console.log(e)
@@ -78,7 +111,6 @@ const deleteRole = async (id) => {
         }
     }
 }
-
 module.exports = {
-    createRoles, getAllRole, deleteRole
+    createRoles, getAllRole, deleteRole, updateRole
 }
