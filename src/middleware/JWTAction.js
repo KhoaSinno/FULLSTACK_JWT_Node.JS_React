@@ -3,7 +3,6 @@ require('dotenv').config()
 
 const nonSecurePaths = ['/logout', '/login', '/register']
 
-
 const createJWT = (payload) => {
     let key = process.env.JWT_SECRET
     let token = null
@@ -59,8 +58,6 @@ const checkUserJWT = (req, res, next) => {
             DT: ''
         })
     }
-
-
 }
 
 // middleware check permission
@@ -77,7 +74,7 @@ const checkUserPermission = (req, res, next) => {
                 DT: ''
             })
         }
-        let canAccess = roles.some((role) => role.url === currentUrl)
+        let canAccess = roles.some((role) => role.url === currentUrl || currentUrl.includes(role.url))
         if (canAccess) {
             next()
         } else {
