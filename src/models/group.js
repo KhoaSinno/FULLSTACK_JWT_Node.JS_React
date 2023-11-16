@@ -11,7 +11,7 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       Group.hasMany(models.User) // 1 - n
-      Group.belongsToMany(models.Role, { through: 'Group_Role' }) // n - n
+      Group.belongsToMany(models.Role, { through: 'Group_Role', foreignKey: 'groupId' }) // n - n
     }
   };
   Group.init({
