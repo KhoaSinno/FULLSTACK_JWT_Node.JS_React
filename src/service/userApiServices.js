@@ -170,7 +170,14 @@ const deleteUser = async (id) => {
         let user = await db.User.findOne({
             where: { id: id }
         })
-
+        console.log('>>>>Check User', user)
+        if (user.dataValues.email === 'sinoo@admin.com') {
+            return {
+                EM: 'Can\'t delete yourself!',
+                EC: 1,
+                DT: []
+            }
+        }
         if (user) {
             await user.destroy();
             return {

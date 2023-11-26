@@ -1,19 +1,16 @@
-# Note's dev (Sinoo's - Version 1.0.0)
+# Note's dev (Sinoo's - Version 1.1.0)
 
-- I'm a second-year student lear at Can Tho University of technology. I intend to finish this project with limited time is one year. I flow Hoi dan IT(vietnamese) in Youtube. I probably will become a Fullstack Development with knowledge:
+- I deploy this project when I was a second-year student learn at `Can Tho University of technology`. I intend to finish this project with limited time is one year. I flow Hoi dan IT(vietnamese) in Youtube. I probably will become a Fullstack Development with knowledge:
 
 > Frontend: reactJs, BS5, scss,..
 >
-> Backend: NodeJs,...
+> Backend: NodeJs (Express FrameWork)
 >
->Tool: Git, Postman,...
+>Order: Git, Postman, JWT, Middleware, Axios
 
 ## Installs
 
 - Node version: 14.17.0
-- npm i --save-exact express@4.17.2 dotenv@10.0.0 body-parser@1.19.1 ejs@3.1.6
-- npm i --save-exact @babel/core@7.15.4 @babel/node@7.15.4 @babel/preset-env@7.15.4 nodemon@2.0.15
-- ... clone file ***package.json*** to easy install
 
 ## Document
 
@@ -31,22 +28,17 @@
 - models: determine structure like database but its command line interface
 - migrations: 'ánh xạ' from models to determine more detail structure
 
-## Questions
-
-### #3 mvc
-
-- model - view - controller
-
-- ORM
-
 ## Learn more
 
-- async await
+- mvc
 
 - ORM
 
 - SSO (next)
 
-## Knowledge
+## Note `.evn`
 
--
+- PORT = 8081
+- REACT_URL = <http://localhost:3000>
+- JWT_SECRET= sinoobungmo
+- JWT_EXPIRES_IN = 1h
